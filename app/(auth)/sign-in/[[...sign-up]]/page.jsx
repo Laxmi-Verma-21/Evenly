@@ -5,6 +5,6 @@ const SignInPage = () => {
   return 
     <SignIn/>;
   
-}
+};
 
-export default SignInPage
+export default SignInPage;

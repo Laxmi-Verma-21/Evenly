@@ -3,8 +3,9 @@ import React from 'react'
 import { Button } from './ui/button'
 
 const Header = () => {
+  const {isLoading} =useStoreUser();
   return (
-    <div>     
+    <header className="fixed top-0 w-full border-b bg-amber-400 backdrop-blur z-50 supports-[backdrop-filter]:bg-amber-100">     
       <SignedOut>
               <SignInButton/>
             <SignUpButton>
@@ -16,7 +17,7 @@ const Header = () => {
       <SignedIn>
             <UserButton />
       </SignedIn>
-      </div>
+      </header>
   )
 }
 
