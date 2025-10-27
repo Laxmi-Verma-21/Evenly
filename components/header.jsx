@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 w-full border-b bg-white/95 backdrop-blur z-50 supports-[backdrop-filter]:bg-white/60">
       <nav className="w-full h-16 flex items-center justify-between px-4">
-        {/* ✅ Left: Logo (extreme left) */}
+        {/* Logo  */}
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="/logos/evenlylogo.png"
@@ -34,7 +34,7 @@ const Header = () => {
           />
         </Link>
 
-        {/* ✅ Center: Nav links (only on homepage) */}
+        {/*Nav links */}
         {path === "/" && (
           <div className="hidden md:flex items-center gap-10 text-gray-700">
             <Link
@@ -52,7 +52,7 @@ const Header = () => {
           </div>
         )}
 
-        {/* ✅ Right: Auth buttons + Dashboard */}
+      
         <div className="flex items-center gap-4">
           <SignedIn>
             {/* Dashboard button for signed-in users */}
@@ -70,7 +70,7 @@ const Header = () => {
               </Button>
             </Link>
 
-            {/* Clerk User avatar */}
+            
             <UserButton afterSignOutUrl="/" />
           </SignedIn>
 
