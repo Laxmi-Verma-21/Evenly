@@ -79,7 +79,7 @@ Live Demo - https://evenly-app-6oh6.vercel.app/
 2. **Install dependencies**
 
 npm install
-# or
+or
 yarn install
 
 
@@ -95,7 +95,7 @@ RESEND_API_KEY=your_resend_key
 4. **Run the development server**
 
 npm run dev
-# or
+or
 yarn dev
 
 
