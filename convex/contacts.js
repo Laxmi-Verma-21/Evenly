@@ -103,7 +103,7 @@ export const createGroup = mutation({
         throw new Error(`User with ID ${id} not found`);
     }
 
-    return await ctx.db.insert("groups", {
+    const groupId = await ctx.db.insert("groups", {
       name: args.name.trim(),
       description: args.description?.trim() ?? "",
       createdBy: currentUser._id,
@@ -113,5 +113,7 @@ export const createGroup = mutation({
         joinedAt: Date.now(),
       })),
     });
+
+    return groupId;
   },
 });

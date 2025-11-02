@@ -7,12 +7,17 @@ import { api } from "@/convex/_generated/api";
 import { useConvexQuery } from "@/hooks/use-convex-query";
 import { Plus, User, Users, UserX } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import React, { useState } from "react";
 import { BarLoader } from "react-spinners";
+import CreateGroupModal from "./_components/create-group-modal";
 
 const ContactsPage = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
   const { data, isLoading } = useConvexQuery(api.contacts.getAllContacts);
+
+  const router = useRouter();
 
   if (isLoading) {
     return (
@@ -118,6 +123,12 @@ const ContactsPage = () => {
           </div>
         )}
       </section>
+
+      <CreateGroupModal
+        isOpen={isCreateGroupModalOpen}
+        onClose = {() => setIsCreateGroupModalOpen(false)}
+        onSuccess={(groupId) => router.push(`/groups/${groupId}`)}
+      />
     </div>
   );
 };
