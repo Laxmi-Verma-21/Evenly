@@ -59,7 +59,7 @@ export default function Dashboard() {
 
           {/* Balance overview cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card>
+            <Card className="backdrop-blur-lg bg-white/70 border border-teal-100 hover:shadow-xl transition-all rounded-2xl">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                   Total Balance
@@ -89,7 +89,7 @@ export default function Dashboard() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="backdrop-blur-lg bg-white/70 border border-teal-100 hover:shadow-xl transition-all rounded-2xl">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                   You are owed
@@ -105,7 +105,7 @@ export default function Dashboard() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="backdrop-blur-lg bg-white/70 border border-teal-100 hover:shadow-xl transition-all rounded-2xl">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                   You owe
@@ -147,7 +147,7 @@ export default function Dashboard() {
             {/* Right column */}
             <div className="space-y-6">
               {/* Balance details */}
-              <Card>
+              <Card className="backdrop-blur-lg bg-white/70 border border-teal-100 hover:shadow-xl transition-all rounded-2xl">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle>Balance Details</CardTitle>
@@ -165,7 +165,7 @@ export default function Dashboard() {
               </Card>
 
               {/* Groups */}
-              <Card>
+              <Card className="backdrop-blur-lg bg-white/70 border border-teal-100 hover:shadow-xl transition-all rounded-2xl">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle>Your Groups</CardTitle>
