@@ -128,21 +128,18 @@ export const getGroupExpenses = query({
         const debtor = split.userId;
         const amt = split.amount;
 
-        // Update totals: increase payer's balance, decrease debtor's balance 
-        totals[payer] += amt; //Payer gains Credit
-        totals[debtor] -= amt; // Debtor goes into debt
+        totals[payer] += amt;
+        totals[debtor] -= amt;
 
         ledger[debtor][payer] += amt; // debtor owes payer
       }
     }
 
-    /* ----------  appling settlements ---------- */
+    /* ----------  apply settlements ---------- */
     for (const s of settlements) {
-      // Update totals: increase payer's balance, derease receiver's balance
       totals[s.paidByUserId] += s.amount;
       totals[s.receivedByUserId] -= s.amount;
 
-      // Update ledger: reduce what the payer owes to the receiver
       ledger[s.paidByUserId][s.receivedByUserId] -= s.amount; // they paid back
     }
 
@@ -163,7 +160,7 @@ export const getGroupExpenses = query({
       });
     });
 
-    /* ----------  Format the response ---------- */
+    /* ----------  shape the response ---------- */
     const balances = memberDetails.map((m) => ({
       ...m,
       totalBalance: totals[m.id],

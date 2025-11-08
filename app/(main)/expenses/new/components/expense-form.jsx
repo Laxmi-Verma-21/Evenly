@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { api } from "@/convex/_generated/api";
-import { useConvexMutation, useConvexQuery } from "@/hooks/use-convex-query";
+import { useMutation, useQuery } from "convex/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -49,10 +49,9 @@ export function ExpenseForm({ type = "individual", onSuccess }) {
   const [splits, setSplits] = useState([]);
 
   // Mutations and queries
-  const { data: currentUser } = useConvexQuery(api.users.getCurrentUser);
-
-  const createExpense = useConvexMutation(api.expenses.createExpense);
-  const categories = getAllCategories();
+  const currentUser = useQuery(api.users.getCurrentUser);
+const createExpense = useMutation(api.expenses.createExpense);
+const categories = getAllCategories();
 
   // Set up form with validation
   const {
@@ -123,17 +122,34 @@ export function ExpenseForm({ type = "individual", onSuccess }) {
       // For 1:1 expenses, set groupId to undefined instead of empty string
       const groupId = type === "individual" ? undefined : data.groupId;
 
+          // 👇👇 ADD THESE LINES HERE
+        console.log("🚀 Submitting expense form data:", data);
+        console.log("📤 Sending to Convex:", {
+          description: data.description,
+          amount,
+          category: data.category || "Other",
+          date: data.date.getTime(),
+          paidByUserId: data.paidByUserId,
+          splitType: data.splitType,
+          splits: formattedSplits,
+          groupId,
+        });
       // Create the expense
-      await createExpense.mutate({
-        description: data.description,
-        amount: amount,
-        category: data.category || "Other",
-        date: data.date.getTime(), // Convert to timestamp
-        paidByUserId: data.paidByUserId,
-        splitType: data.splitType,
-        splits: formattedSplits,
-        groupId,
-      });
+      await createExpense({
+  description: data.description,
+  amount,
+  category: data.category || "Other",
+  date: data.date.getTime(),
+  paidByUserId: data.paidByUserId,
+  splitType: data.splitType,
+  splits: formattedSplits.map((split) => ({
+    userId: split.userId,
+    amount: split.amount,
+    paid: split.paid,
+  })),
+  groupId: groupId || undefined,
+});
+
 
       toast.success("Expense created successfully!");
       reset(); // Reset form
